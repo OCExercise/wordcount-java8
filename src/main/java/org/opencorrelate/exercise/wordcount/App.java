@@ -1,5 +1,7 @@
 package org.opencorrelate.exercise.wordcount;
 
+import java.util.List;
+
 import gnu.getopt.Getopt;
 
 public class App 
@@ -12,15 +14,14 @@ public class App
     		System.exit(-1);
     	}
     	
-    	Getopt g = new Getopt("wordcount", args, "i:");
+    	Getopt g = new Getopt("wordcount", args, "f:");
     	
     	int c;
     	while ((c = g.getopt()) != -1) {
     		switch (c) 
     		{
-    			case 'i':
-    				String input = g.getOptarg();
-    				System.out.println(input);
+    			case 'f':
+				count(g);
     				break;
     			
     			default:
@@ -31,9 +32,25 @@ public class App
     	
         
     }
+
+
+	private static void count(Getopt g) {
+		
+		try {
+			String path = g.getOptarg();
+			List<String> inputs = WordCount.open(path);
+			WordCount
+				.count(inputs)
+				.stream()
+				.forEach(i -> System.out.println(i));
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			usage();
+		}
+	}
     
     
     public static void usage() {
-    	System.err.println("Usage: wordcount -i <input string>");
+    	System.err.println("Usage: wordcount -f <input file>");
     }
 }

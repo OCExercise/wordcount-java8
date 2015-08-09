@@ -1,0 +1,6 @@
+5
+a aa bb cc def ghi
+a a a a a bb bb bb bb c c
+a b c d e ab ba cd dc c d ghi
+a aa aa aa aa bbb ccc def ghi
+a aa aa bbb aa aa ccc defg ghi
